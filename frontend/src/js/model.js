@@ -30,8 +30,9 @@ export const state = {
 
 export const getProgram = async function() {
   try {
-    const res = await fetch('/api/program');
-    if (!res.ok) throw new Error('fuuck')
+    const url = import.meta.env.MODE === 'development' ? '/api/program' : import.meta.env.VITE_PROGRAM_URL;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Failed to fetch program')
     const data = await res.json();
     state.cinemaProgram = data.data;
     state.cinemaProgram.forEach(el => {
