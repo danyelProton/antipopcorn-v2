@@ -1,0 +1,12 @@
+{
+  "name": "backend-shared",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mongoose": "^9.3.0"
+  }
+}

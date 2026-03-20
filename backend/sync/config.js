@@ -1,0 +1,12 @@
+export const LUM_PROGRAM_URL = 'https://www.kino-lumiere.sk/klient-863/kino-241/stranka-19175';
+export const KFE_PROGRAM_URL = 'https://www.kfe.sk/cely-program';
+export const NOS_PROGRAM_URL = 'https://www.nostalgia.sk/program';
+export const MLA_PROGRAM_URL = 'https://www.kinomladost.sk/ajax/ajax_program_kina_rozsireny.php?strana=1&pocet_na_strane=500&sTab=&sTabID=&klient=3538&kino=513&smid=196389669&vychodzi_pohlad=&max_pocet_stran=5';
+export const LUM_MOVIE_URL = 'https://www.kino-lumiere.sk/klient-863/kino-241/stranka-8409/film-';
+export const KFE_MOVIE_URL = 'https://www.kfe.sk/film/';
+export const NOS_MOVIE_URL = 'https://www.nostalgia.sk/film/';
+export const MLA_MOVIE_URL = 'https://www.kinomladost.sk/klient-3538/kino-513/stranka-16300/film-';
+export const LUMIERE_ID = 'LUM';
+export const FILM_EUROPE_ID = 'KFE';
+export const NOSTALGIA_ID = 'NOS';
+export const MLADOST_ID = 'MLA';

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Program dobrých kín v Bratislave." />
+
+    <link rel="icon" type="image/png" href="/src/img/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/src/img/favicon.svg" />
+    <link rel="shortcut icon" href="/src/img/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/img/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="antipopcorn" />
+    <link rel="manifest" href="/src/img/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script type="module" src="src/js/controller.js"></script>
+
+    <title>antipopcorn | program dobrých kín v Bratislave</title>
+  </head>
+
+  <body>
+
+    <header class="header">
+      <div class="header-box">
+        <div class="logo-box">
+          <a class="logo-link" href="#">
+            <img class="logo-img" src="src/img/antipopcorn-header.png" alt="antipopcorn logo">
+          </a>
+        </div>
+        <a class="cta" href="#form">Chýba tu kino?</a>
+      </div>
+      <aside class="filter-bar">
+        <div class="filter-input-box">
+          <label for="date" class="filter__label filter__label-date"></label>
+          <select class="filter__date" id="date">
+            <option value="ALL">CELÝ PROGRAM</option>
+            <option value="TOD">DNES</option>
+            <option value="TOM">ZAJTRA</option>
+            <option value="DAT">POZAJTRA</option>
+            <option value="TW">TENTO TÝŽDEŇ</option>
+            <option value="NW">BUDÚCI TÝŽDEŇ</option>
+          </select>
+        </div>
+        <div class="filter-input-box">
+          <label for="cinema" class="filter__label filter__label-cinema"></label>
+          <select class="filter__cinema" id="cinema">
+            <option value="ALL">VŠETKY KINÁ</option>
+            <option value="LUM">LUMIÈRE</option>
+            <option value="KFE">FILM EUROPE</option>
+            <option value="NOS">NOSTALGIA</option>
+            <option value="MLA">MLADOSŤ</option>
+          </select>
+        </div>
+        <button class="filter__reset">RESET</button>
+      </aside>
+    </header>
+
+
+    <main class="program container vh">
+    </main>
+
+
+    <div class="modal hidden">
+      <iframe class="yt-embed" src="about:blank" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <!-- <lite-youtube videoid=""></lite-youtube> -->
+      <!-- <button class="close-modal-btn" aria-label="close"><span class="close-modal-btn__inner">&times;</span></button> -->
+      <button class="close-modal-btn" aria-label="close">
+        <span class="close-modal-btn__inner">&times;</span>
+      </button>
+    </div>
+    <div class="overlay hidden"></div>
+    <div class="back-to-top-box">
+      <a class="back-to-top" href="#">Späť na začiatok</a>
+    </div>
+
+
+    <footer class="footer">
+      <div class="footer-box">
+        <section class="footer__side">
+          <div class="side__icons">
+            <svg class="footer__icon footer__icon-love">
+              <use href="src/img/icons.svg#love"></use>
+            </svg>
+            <svg class="footer__icon footer__icon-forever">
+              <use href="src/img/icons.svg#forever"></use>
+            </svg>
+            <span class="side__mtn2">MTN2</span>
+          </div>
+          <img class="side__logo" src="src/img/antipopcorn-footer.png" alt="antipopcorn logo">
+        </section>
+        <section class="footer__form">
+          <div class="form_desc">
+            <h2 class="form__heading">Chýba tu niečo?</h2>
+            <p class="form__text">Ak ti tu chýba tvoje obľúbené kino alebo máš akúkoľvek pripomienku, napíš. Ozvem sa, čo sa s tým dá robiť.</p>
+          </div>
+          <div class="form-box">
+            <form name="cta" class="form" id="form" method="POST" data-netlify="true">
+              <label for="email" class="form__label form__label-email">Email</label>
+              <input class="form__email" type="email" name="email" id="email" required>
+              <label for="message" class="form__label form__label-message">Správa</label>
+              <textarea class="form__message" rows="4" name="message" id="message" required></textarea>
+              <button type="submit" class="form__submit-btn">Odošli</button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </footer>
+
+
+
+
+  </body>
+</html>
