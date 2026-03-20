@@ -13,14 +13,22 @@ process.on('uncaughtException', err => {
   process.exit(1);
 });
 
-try {
-  const DB = process.env.DATABASE.replace('<db_password>', process.env.DATABASE_PASSWORD);
-  await mongoose.connect(DB);
-  console.log('DB connection successful');
-} catch(err) {
-  logError('db_connection', err);
-  return;
+
+let isConnected = false;
+
+const connectDB = async function() {
+  if (isConnected) return;
+  
+  try {
+    const DB = process.env.DATABASE.replace('<db_password>', process.env.DATABASE_PASSWORD);
+    await mongoose.connect(DB);
+    isConnected = true;
+  } catch(err) {
+    logError('db_connection', err);
+    throw err; // rethrow so the route handler catches it and sends 500
+  }
 }
+
 
 const app = express();
 
@@ -38,6 +46,7 @@ app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 app.get('/api/program', async (req, res) => {
   try {
+    await connectDB();
     const program = await Program.find();
     // console.log(program);
 
@@ -64,23 +73,23 @@ if (process.env.NODE_ENV === 'development') {
   const port = process.env.PORT || 3000;
   const host = process.env.HOST || 'localhost';
   const server = app.listen(port, host, () => console.log(`Listening to requests on port ${port}`));
+
+  // handling unhandled promise rejections - nehandlovane errors v async kode - napr. chyba pri connectnuti databazy; exitneme process, ale az vtedy ked server ukoncil vsetky pending alebo prebiehajuce tasky (process.exit je executed az ked je server closed)
+  process.on('unhandledRejection', err => {
+    console.log(err);
+    server.close(() => {
+      process.exit(1);
+    });
+  });
+  
+  // handlovanie SIGTERM - signal, ktory posielaju niektore hostingy, aby ukoncili proces - napr. kde sa deployuje novy kod; nepouzivame process.exit(), lebo uz samotny SIGTERM sposobi ukoncenie aplikacie
+  process.on('SIGTERM', () => {
+    console.log('SIGTERM received. Shutting down gracefully.');
+    server.close(() => {
+      console.log('Process terminated.');
+    });
+  });
 }
-
-// handling unhandled promise rejections - nehandlovane errors v async kode - napr. chyba pri connectnuti databazy; exitneme process, ale az vtedy ked server ukoncil vsetky pending alebo prebiehajuce tasky (process.exit je executed az ked je server closed)
-process.on('unhandledRejection', err => {
-  console.log(err);
-  server.close(() => {
-    process.exit(1);
-  });
-});
-
-// handlovanie SIGTERM - signal, ktory posielaju niektore hostingy, aby ukoncili proces - napr. kde sa deployuje novy kod; nepouzivame process.exit(), lebo uz samotny SIGTERM sposobi ukoncenie aplikacie
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received. Shutting down gracefully.');
-  server.close(() => {
-    console.log('Process terminated.');
-  });
-});
 
 
 export default app;
