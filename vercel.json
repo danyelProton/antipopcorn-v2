@@ -2,9 +2,7 @@
   "version": 2,
   "buildCommand": "npm run bundle:api",
   "functions": {
-    "dist/api/api.js": {
-      "runtime": "@vercel/node"
-    }
+    "dist/api/api.js": {}
   },
   "rewrites": [
     {
