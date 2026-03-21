@@ -29,6 +29,11 @@ export const state = {
 
 
 const setWeekday = function(date) {
+  const today = new Date();
+  const todayFormatted = today.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' });
+  const tomorrow = addDays(today, 1);
+  const tomorrowFormatted = tomorrow.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' });
+  
   let weekday;
 
   if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === todayFormatted) {

@@ -23,19 +23,18 @@ export const getProgramKfe = async function(page, url = KFE_PROGRAM_URL, cinema 
   // console.log(programList);
 
   const program = programList.map((mov, i) => {
-    const today = new Date();
-    const todayFormatted = today.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' });
-    const tomorrow = addDays(today, 1);
-    const tomorrowFormatted = tomorrow.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' });
-
-
-
     const date = new Date(mov.startsAt);
 
     const day = date.getDate().toString().padStart(2, '0');
     const month = date.toLocaleString('sk-SK', { month: 'long' }).slice(0, 3);
 
     // weekday set in frontend
+
+    // const today = new Date();
+    // const todayFormatted = today.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' });
+    // const tomorrow = addDays(today, 1);
+    // const tomorrowFormatted = tomorrow.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' });
+
     // let weekday;
     // if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === todayFormatted) {
     //   weekday = 'dnes';
