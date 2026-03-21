@@ -28,6 +28,21 @@ export const state = {
 };
 
 
+const setWeekday = function(date) {
+  let weekday;
+
+  if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === todayFormatted) {
+    weekday = 'dnes';
+  } else if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === tomorrowFormatted) {
+    weekday = 'zajtra';
+  } else {
+    weekday = date.toLocaleString('sk-SK', { weekday: 'long' });
+  };
+
+  return weekday;
+};
+
+
 export const getProgram = async function() {
   try {
     const url = import.meta.env.MODE === 'development' ? '/api/program' : import.meta.env.VITE_PROGRAM_URL;
@@ -36,7 +51,8 @@ export const getProgram = async function() {
     const data = await res.json();
     state.cinemaProgram = data.data;
     state.cinemaProgram.forEach(el => {
-    el.date = new Date(el.date);
+      el.date = new Date(el.date);
+      el.weekday = setWeekday(el.date);
   });
   } catch(err) {
     throw err;

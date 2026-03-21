@@ -35,14 +35,15 @@ export const getProgramKfe = async function(page, url = KFE_PROGRAM_URL, cinema 
     const day = date.getDate().toString().padStart(2, '0');
     const month = date.toLocaleString('sk-SK', { month: 'long' }).slice(0, 3);
 
-    let weekday;
-    if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === todayFormatted) {
-      weekday = 'dnes';
-    } else if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === tomorrowFormatted) {
-      weekday = 'zajtra';
-    } else {
-      weekday = date.toLocaleString('sk-SK', { weekday: 'long' });
-    };
+    // weekday set in frontend
+    // let weekday;
+    // if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === todayFormatted) {
+    //   weekday = 'dnes';
+    // } else if (date.toLocaleDateString('sk-SK', { month: '2-digit', day: '2-digit', year: '2-digit' }) === tomorrowFormatted) {
+    //   weekday = 'zajtra';
+    // } else {
+    //   weekday = date.toLocaleString('sk-SK', { weekday: 'long' });
+    // };
 
     const time = date.toLocaleString('sk-SK', { hour: '2-digit', minute: '2-digit' });
     const title = mov.names.sk;
@@ -56,7 +57,7 @@ export const getProgramKfe = async function(page, url = KFE_PROGRAM_URL, cinema 
       date,
       day,
       month,
-      weekday,
+      // weekday,
       time,
       title,
       movieId,
@@ -109,7 +110,7 @@ export const getProgramLum = async function() {
     const date = new Date(newYearIndex === -1 || i < newYearIndex  ? new Date().getFullYear() : new Date().getFullYear() + 1, Number(dateString.split('.')[1] - 1), dateString.split('.')[0], scrapedTime.textContent.split(':')[0], scrapedTime.textContent.split(':')[1]);
     const day = date.getDate().toString().padStart(2, '0');
     const month = date.toLocaleString('sk-SK', {month: 'long'}).slice(0, 3);
-    const weekday = mov.querySelector('.dlhyDen')?.textContent ?? mov.querySelector('.ap_day').textContent;
+    // const weekday = mov.querySelector('.dlhyDen')?.textContent ?? mov.querySelector('.ap_day').textContent; // weekday set in frontend
     const time = scrapedTime.textContent;
     const title = mov.querySelector('.text-underline')?.textContent;
     const movieId = scrapedCalEventItem.href.match(regexMovieId).toString().slice(5)
@@ -122,7 +123,7 @@ export const getProgramLum = async function() {
       date,
       day,
       month,
-      weekday,
+      // weekday,
       time,
       title,
       movieId,
@@ -166,7 +167,7 @@ export const getProgramMla = async function() {
       const date = new Date(dateStringFull.split('.')[2], Number(dateStringFull.split('.')[1]) - 1, dateStringFull.split('.')[0], scrapedBtnBuy?.textContent.split(':')[0] || '09', scrapedBtnBuy?.textContent.split(':')[1] || '00');
       const day = date.getDate().toString().padStart(2, '0');
       const month = date.toLocaleString('sk-SK', {month: 'long'}).slice(0, 3);
-      const weekday = item.children[1].textContent.slice(1, -1).toLowerCase();
+      // const weekday = item.children[1].textContent.slice(1, -1).toLowerCase(); // weekday set in frontend
       const time = scrapedBtnBuy?.textContent || 'pozri<br>web';
       const title = scrapedLink.textContent;
       const movieId = scrapedLink.href.match(regexMovieIdMladost).toString().slice(5)
@@ -179,7 +180,7 @@ export const getProgramMla = async function() {
         date,
         day,
         month,
-        weekday,
+        // weekday,
         time,
         title,
         movieId,
