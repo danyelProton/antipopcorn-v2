@@ -18,7 +18,7 @@ let isConnected = false;
 
 const connectDB = async function() {
   if (isConnected) return;
-  
+
   try {
     const DB = process.env.DATABASE.replace('<db_password>', process.env.DATABASE_PASSWORD);
     await mongoose.connect(DB);
@@ -27,7 +27,7 @@ const connectDB = async function() {
     logError('db_connection', err);
     throw err; // rethrow so the route handler catches it and sends 500
   }
-}
+};
 
 
 const app = express();

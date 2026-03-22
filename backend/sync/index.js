@@ -11,6 +11,18 @@ import * as Program from './program.js';
 import { asyncTimeout, withRetry, logError } from '../shared/utils.js';
 
 
+// when run on Windows Task Scheduler
+process.on('uncaughtException', (err) => {
+  console.error('uncaughtException:', err);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('unhandledRejection:', err);
+  process.exit(1);
+});
+
+
 
 puppeteer.use(StealthPlugin());
 
@@ -152,6 +164,7 @@ export const handler = async function() {
     logError('main_function', err);
   } finally {
     if (browser) await browser.close();
+    process.exit(0);
   }
 };
 
